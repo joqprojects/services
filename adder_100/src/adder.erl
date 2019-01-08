@@ -123,6 +123,7 @@ handle_call({crash}, _From, State) ->
 handle_call({heart_beat}, _From, State) ->
     DnsInfo=State#state.dns_info,
     if_dns:call("dns",dns,dns_register,[DnsInfo]),
+    rpc:cast(node(),kubelet,dns_register,[DnsInfo]),
    % if_dns:call("contoller",controller,controller_register,[DnsInfo]),
     Reply=ok,
    {reply, Reply, State};
