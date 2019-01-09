@@ -98,6 +98,7 @@ init([]) ->
 			port=Port
 		       },
     spawn(fun()-> local_heart_beat(?HEARTBEAT_INTERVAL) end), 
+    io:format("Service ~p~n",[{?MODULE, 'started ',?LINE}]),
     {ok, #state{dns_info=MyDnsInfo}}.   
     
 %% --------------------------------------------------------------------
@@ -207,8 +208,10 @@ code_change(_OldVsn, State, _Extra) ->
 %% --------------------------------------------------------------------
 local_heart_beat(Interval)->
 %    io:format(" ~p~n",[{?MODULE,?LINE}]),
-    timer:sleep(Interval),
+    timer:sleep(100),
     ?MODULE:heart_beat(),
+    timer:sleep(Interval),
+
     spawn(fun()-> local_heart_beat(Interval) end).
 %% --------------------------------------------------------------------
 %% Function: 
