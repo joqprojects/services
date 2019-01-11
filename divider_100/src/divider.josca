@@ -1,7 +1,8 @@
-{specification, adder}.
-{description, "Josca file for adder" }.
+{specification, divider}.
+{type,service}.
+{description, "divider" }.
 {vsn, "1.0.0" }.
-{exported_services,[{"adder","1.0.0"}]}.
+{exported_services,[{"divider","1.0.0"}]}.
 {num_instances,2}.
 {zone,["stugan.attic"]}.
 {geo_red,[]}.
