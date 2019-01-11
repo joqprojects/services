@@ -1,4 +1,5 @@
 {specification, adder}.
+{type,service}.
 {description, "Josca file for adder" }.
 {vsn, "1.0.0" }.
 {exported_services,[{"adder","1.0.0"}]}.
