@@ -4,7 +4,7 @@
 {vsn, "1.0.0" }.
 {exported_services,[{"divider","1.0.0"}]}.
 {num_instances,2}.
-{zone,["stugan.attic"]}.
+{zone,["home.balcony"]}.
 {geo_red,[]}.
-{needed_capabilities,[]}.
+{needed_capabilities,[heat_ctrl]}.
 {dependencies ,[]}.

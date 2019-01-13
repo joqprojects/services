@@ -4,7 +4,7 @@
 {vsn, "1.0.0" }.
 {exported_services,[{"subtract","1.0.0"}]}.
 {num_instances,2}.
-{zone,["stugan.attic"]}.
+{zone,["stugan.littleHouse"]}.
 {geo_red,[]}.
 {needed_capabilities,[]}.
 {dependencies ,[]}.
