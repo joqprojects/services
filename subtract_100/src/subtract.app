@@ -7,6 +7,6 @@
 	  [subtract_app,subtract_sup,subtract,subtract_lib]},
 {registered,[subtract]},
 {applications, [kernel,stdlib]},
-{mod, {adder_app,[]}},
+{mod, {subtract_app,[]}},
 {start_phases, []}
 ]}.

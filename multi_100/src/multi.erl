@@ -112,7 +112,7 @@ init([]) ->
 %%          {stop, Reason, State}            (terminate/2 is called)
 %% --------------------------------------------------------------------
 
-handle_call({multi,A,B}, _From, State) ->
+handle_call({mul,A,B}, _From, State) ->
     Reply=rpc:call(node(),multi_lib,mul,[A,B]),
     {reply, Reply, State};
 
@@ -125,7 +125,6 @@ handle_call({heart_beat}, _From, State) ->
     DnsInfo=State#state.dns_info,
     if_dns:call("dns",dns,dns_register,[DnsInfo]),
     rpc:cast(node(),kubelet,dns_register,[DnsInfo]),
-   % if_dns:call("contoller",controller,controller_register,[DnsInfo]),
     Reply=ok,
    {reply, Reply, State};
     
@@ -136,7 +135,8 @@ handle_call({stop}, _From, State) ->
 
 handle_call(Request, From, State) ->
     DnsInfo=State#state.dns_info,
-    if_log:call(DnsInfo,notification,[?MODULE,?LINE,'unmatched_signal',Request,From]),
+    io:format("unmatched match signal ~p~n",[{Request,DnsInfo,?MODULE,?LINE}]),
+  %  if_log:call(DnsInfo,notification,[?MODULE,?LINE,'unmatched_signal',Request,From]),
     Reply = {unmatched_signal,?MODULE,Request,From},
     {reply, Reply, State}.
 
@@ -149,7 +149,7 @@ handle_call(Request, From, State) ->
 %% --------------------------------------------------------------------
 handle_cast(Msg, State) ->
     DnsInfo=State#state.dns_info,
-    if_log:call(DnsInfo,notification,[?MODULE,?LINE,'unmatched_signal',Msg]),
+%    if_log:call(DnsInfo,notification,[?MODULE,?LINE,'unmatched_signal',Msg]),
     io:format("unmatched match cast ~p~n",[{?MODULE,?LINE,Msg}]),
     {noreply, State}.
 
@@ -165,7 +165,7 @@ handle_cast(Msg, State) ->
 
 handle_info(Info, State) ->
   DnsInfo=State#state.dns_info,
-    if_log:call(DnsInfo,notification,[?MODULE,?LINE,'unmatched_signal',Info]),
+   % if_log:call(DnsInfo,notification,[?MODULE,?LINE,'unmatched_signal',Info]),
     io:format("unmatched match info ~p~n",[{?MODULE,?LINE,Info}]),
     {noreply, State}.
 
