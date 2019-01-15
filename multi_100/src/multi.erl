@@ -99,6 +99,9 @@ init([]) ->
 		       },
     spawn(fun()-> local_heart_beat(?HEARTBEAT_INTERVAL) end), 
     io:format("Service ~p~n",[{?MODULE, 'started ',?LINE}]),
+    rpc:cast(node(),if_dns,call,["controller",controller,dns_register,[MyDnsInfo]]),
+    rpc:cast(node(),if_dns,call,["dns",dns,dns_register,[MyDnsInfo]]),
+    rpc:cast(node(),kubelet,dns_register,[MyDnsInfo]),
     {ok, #state{dns_info=MyDnsInfo}}.   
     
 %% --------------------------------------------------------------------

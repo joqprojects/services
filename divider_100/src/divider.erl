@@ -95,6 +95,10 @@ init([]) ->
 			port=Port
 		       },
     spawn(fun()-> local_heart_beat(?HEARTBEAT_INTERVAL) end), 
+    rpc:cast(node(),if_dns,call,["controller",controller,dns_register,[MyDnsInfo]]),
+    rpc:cast(node(),if_dns,call,["dns",dns,dns_register,[MyDnsInfo]]),
+    rpc:cast(node(),kubelet,dns_register,[MyDnsInfo]),
+
     {ok, #state{dns_info=MyDnsInfo}}.   
     
 %% --------------------------------------------------------------------
@@ -114,7 +118,7 @@ handle_call({divi,A,B}, _From, State) ->
 
 
 handle_call({heart_beat}, _From, State) ->
-    DnsInfo=State#state.dns_info,
+    DnsInfo=State#state.dns_info,   
     if_dns:call("dns",dns,dns_register,[DnsInfo]),
     rpc:cast(node(),kubelet,dns_register,[DnsInfo]),
     Reply=ok,
