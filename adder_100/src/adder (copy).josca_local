@@ -1,8 +1,8 @@
-{specification, divider}.
+{specification, adder}.
 {type,service}.
-{description, "divider" }.
+{description, "Josca file for adder" }.
 {vsn, "1.0.0" }.
-{exported_services,[{"divider","1.0.0"}]}.
+{exported_services,[{"adder","1.0.0"}]}.
 {num_instances,2}.
 {zone,[]}.
 {geo_red,[]}.
